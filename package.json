@@ -2,11 +2,8 @@
   "name": "tarifas-uber",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://johanalarcon.github.io/tarifas-uber/",
   "scripts": {
     "dev": "next dev",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d out",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -34,7 +31,6 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.7",
-    "gh-pages": "^6.1.1",
     "typescript": "^5"
   }
 }
