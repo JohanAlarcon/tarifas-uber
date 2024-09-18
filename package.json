@@ -2,7 +2,7 @@
   "name": "tarifas-uber",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/JohanAlarcon/tarifas-uber",
+  "homepage": "https://johanalarcon.github.io/tarifas-uber/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
