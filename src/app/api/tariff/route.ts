@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import db from '../conexion';
 
 //http://localhost:3000/api/tariff?service_type_id=2
+export const dynamic = 'force-dynamic'; 
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url); 
   const service_type_id = searchParams.get('service_type_id');
