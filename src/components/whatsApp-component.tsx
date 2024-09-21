@@ -24,7 +24,7 @@ function WhatsAppRequest ({ distance, time, price, origin, destination, valueSer
             console.log('new link', randomGroup.link);
           };
         fetchGroups();
-    }, [destination]);
+    }, [time]);
 
     const generateWhatsAppMessage = () => {
 

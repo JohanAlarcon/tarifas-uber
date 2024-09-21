@@ -1,6 +1,7 @@
-import { Facebook, Instagram, Twitter } from "@mui/icons-material";
+import { Facebook, Instagram } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
 import Link from "next/link";
+import { FaTiktok } from 'react-icons/fa';
 
 function Footer() {
   return (
@@ -42,18 +43,18 @@ function Footer() {
           <Facebook sx={{ fontSize: 30, color: "#4267B2" }} />
         </Link>
         <Link
-          href="https://www.instagram.com/rapimoto3"
+          href="https://www.instagram.com/rapi.moto3?igsh=a3A2dmVpM29tZDI0"
           target="_blank"
           color="inherit"
         >
           <Instagram sx={{ fontSize: 30, color: "#C13584" }} />
         </Link>
         <Link
-          href="https://www.twitter.com/rapimoto"
+          href="https://www.tiktok.com/@rapimoto3?_t=8prZ0R4CC7Z&_r=1"
           target="_blank"
           color="inherit"
         >
-          <Twitter sx={{ fontSize: 30, color: "#1DA1F2" }} />
+          <FaTiktok style={{ fontSize: 27, color: '#000' }} />
         </Link>
       </Box>
     </Box>
