@@ -5,6 +5,7 @@ import db from '../conexion';
 export const dynamic = 'force-dynamic'; 
 
 export async function GET(request: Request) {
+  try {
   const { searchParams } = new URL(request.url); 
   const service_type_id = searchParams.get('service_type_id');
 
@@ -12,7 +13,6 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'Missing service_type_id parameter' }, { status: 400 });
   }
 
-  try {
    
     const [rows] = await db.query('SELECT * FROM tariff WHERE service_type_id = ?', [service_type_id]);
 
