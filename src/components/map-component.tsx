@@ -152,8 +152,18 @@ function MapComponent() {
   };
 
   const getValueService = async () => {
-    const response = await fetch(`/api/tariff?service_type_id=${valueService}`);
-    const data = await response.json();
+    /*const response = await fetch(`/api/tariff?service_type_id=${valueService}`);
+    const data = await response.json();*/
+    const data = [
+      {
+        base_rate: 4000,
+        base_km: 4,
+        per_km_rate: 900,
+        per_min_rate: 140,
+        night_surcharge: 500,
+        festive_surcharge: 500
+      }
+    ];
     return data;
   };
 
@@ -165,8 +175,12 @@ function MapComponent() {
 
   useEffect(() => {
     const fetchServices = async () => {
-      const response = await fetch("/api/services");
-      const data = await response.json();
+      /*const response = await fetch("/api/services");
+      const data = await response.json();*/
+      const data = [
+        { id: 1, name: "Servicio de domicilio" },
+        { id: 2, name: "Servicio de transporte" }
+      ];
       setServices(data);
     };
 
@@ -299,7 +313,8 @@ function MapComponent() {
       >
         <Avatar
           alt="Rapimoto"
-          src="/logo-rapimoto.png"
+          /* src="/logo-rapimoto.png" */
+          src="https://siandsi2.org/application/logo-rapimoto.png"
           sx={{ width: 90, height: 90, mb: { xs: 2, sm: 0 } }}
         />
         <Typography

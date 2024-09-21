@@ -15,7 +15,7 @@ function WhatsAppRequest ({ distance, time, price, origin, destination, valueSer
   
     const [whatsappGroupLink, setWhatsappGroupLink] = useState('');
 
-    useEffect(() => {
+ /*    useEffect(() => {
         const fetchGroups = async () => {
             const response = await fetch("/api/groups");
             const data = await response.json();
@@ -24,7 +24,7 @@ function WhatsAppRequest ({ distance, time, price, origin, destination, valueSer
             console.log('new link', randomGroup.link);
           };
         fetchGroups();
-    }, [time]);
+    }, [time]); */
 
     const generateWhatsAppMessage = () => {
 
