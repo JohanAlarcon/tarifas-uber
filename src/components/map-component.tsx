@@ -221,8 +221,8 @@ function MapComponent() {
 
   const calculateValue = () => {
     if (originLocation && destinationLocation) {
-      setOriginLocation(null);
-      setDestinationLocation(null);
+      /* setOriginLocation(null);
+      setDestinationLocation(null); */
       setLoading(true);
       const service = new google.maps.DistanceMatrixService();
       const directionsService = new google.maps.DirectionsService();
@@ -272,6 +272,12 @@ function MapComponent() {
 
             if (isHoliday(new Date())) {
               price += festive_surcharge;
+            }
+
+            console.log('valueService : ', valueService);
+
+            if (valueService == 1) {
+              price += 500;
             }
 
             const formatPrice = new Intl.NumberFormat("es-CO", {
