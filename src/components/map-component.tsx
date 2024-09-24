@@ -154,16 +154,32 @@ function MapComponent() {
   const getValueService = async () => {
     /*const response = await fetch(`/api/tariff?service_type_id=${valueService}`);
     const data = await response.json();*/
-    const data = [
-      {
-        base_rate: 4000,
-        base_km: 4,
-        per_km_rate: 900,
-        per_min_rate: 140,
-        night_surcharge: 500,
-        festive_surcharge: 500
-      }
-    ];
+
+    let data = [];
+
+    if (valueService == 1) {
+      data = [
+        {
+          base_rate: 5000,
+          base_km: 5,
+          per_km_rate: 1000,
+          per_min_rate: 100,
+          night_surcharge: 1000,
+          festive_surcharge: 1000
+        }
+      ];
+    }else{
+      data = [
+        {
+          base_rate: 4000,
+          base_km: 4,
+          per_km_rate: 900,
+          per_min_rate: 100,
+          night_surcharge: 1000,
+          festive_surcharge: 1000
+        }
+      ];
+    }
     return data;
   };
 
@@ -232,13 +248,21 @@ function MapComponent() {
           origin: originLocation,
           destination: destinationLocation,
           travelMode: google.maps.TravelMode.DRIVING,
+          drivingOptions: {
+            departureTime: new Date(), 
+            trafficModel: google.maps.TrafficModel.BEST_GUESS, 
+          },
+          optimizeWaypoints: true, 
         },
         (response, status) => {
           if (status === "OK") {
             setDirectionsResponse(response);
+          } else {
+            console.error(`Error al obtener la ruta: ${status}`);
           }
         }
       );
+      
 
       service.getDistanceMatrix(
         {
@@ -263,21 +287,15 @@ function MapComponent() {
             const time = parseFloat(timeText.split(" ")[0]);
             if (distance > base_km) {
               price = Number(price) + Number((distance - base_km) * per_km_rate);
-              //price += time * per_min_rate;
+              price += time * per_min_rate;
             }
 
-            if (new Date().getHours() >= 20 || new Date().getHours() <= 6) {
+            if (new Date().getHours() >= 20 || new Date().getHours() <= 5) {
               price += night_surcharge;
             }
 
             if (isHoliday(new Date())) {
               price += festive_surcharge;
-            }
-
-            console.log('valueService : ', valueService);
-
-            if (valueService == 1) {
-              price += 500;
             }
 
             const formatPrice = new Intl.NumberFormat("es-CO", {
