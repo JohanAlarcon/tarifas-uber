@@ -353,12 +353,8 @@ function MapComponent() {
                   }).format(price);
 
                   // Actualizar el estado con la distancia y el tiempo
-                  setDistance(
-                    `La distancia caminando es de ${walkingDistanceText}`
-                  );
-                  setTime(
-                    `El tiempo estimado conduciendo es de ${drivingTimeText}`
-                  );
+                  setDistance(`La distancia es de ${walkingDistanceText}`);
+                  setTime(`El tiempo estimado es de ${drivingTimeText}`);
                   setPrice(`El precio estimado es de ${formatPrice}`);
                   setLoading(false);
                 }
