@@ -316,14 +316,12 @@ function MapComponent() {
               },
               async (drivingResponse, drivingStatus) => {
                 if (drivingStatus === "OK" && drivingResponse) {
-                  const drivingTimeText =
-                    drivingResponse.rows[0].elements[0].duration.text;
+                  const drivingTimeText = drivingResponse.rows[0].elements[0].duration.text;
+                  //get time in minutes
+                  const drivingTime = drivingResponse.rows[0].elements[0].duration.value / 60;
 
                   // Aquí puedes realizar los cálculos de precio
-                  const distance = parseFloat(
-                    walkingDistanceText.split(" ")[0]
-                  );
-                  const time = parseFloat(drivingTimeText.split(" ")[0]);
+                  const distance = parseFloat(walkingDistanceText.split(" ")[0]);
 
                   const data = await getValueService();
                   const base_rate = data[0].base_rate;
@@ -336,7 +334,7 @@ function MapComponent() {
                   let price = base_rate;
                   if (distance > base_km) {
                     price = Number(price) + Number((distance - base_km) * per_km_rate);
-                    price += time * per_min_rate;
+                    price += drivingTime * per_min_rate;
                   }
 
                   if (new Date().getHours() >= 20 || new Date().getHours() <= 5) {
