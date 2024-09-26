@@ -234,9 +234,9 @@ function MapComponent() {
     fetchServices();
   }, []);
 
-  useEffect(() => {
+ /*  useEffect(() => {
     handleUseCurrentLocation("origin")();
-  }, [isLoaded]);
+  }, [isLoaded]); */
 
   const onLoadOrigin = (autocomplete: google.maps.places.Autocomplete) => {
     setSearchResultOrigin(autocomplete);
@@ -437,7 +437,7 @@ function MapComponent() {
             restrictions={restrictions}
           >
             <Paper sx={{ p: "9px 4px", display: "flex", alignItems: "center" }}>
-              <IconButton sx={{ p: "10px" }} aria-label="menu">
+              <IconButton sx={{ p: "10px" }} aria-label="menu" onClick={handleUseCurrentLocation("origin")} >
                 <PlaceIcon />
               </IconButton>
               <InputBase
@@ -471,7 +471,7 @@ function MapComponent() {
             restrictions={restrictions}
           >
             <Paper sx={{ p: "9px 4px", display: "flex", alignItems: "center" }}>
-              <IconButton sx={{ p: "10px" }} aria-label="menu">
+              <IconButton sx={{ p: "10px" }} aria-label="menu" onClick={handleUseCurrentLocation("destination")} >
                 <PlaceIcon />
               </IconButton>
               <InputBase
