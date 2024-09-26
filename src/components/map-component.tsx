@@ -78,14 +78,8 @@ interface MapComponentProps {
 }
 
 function MapComponent() {
-  const [originLocation, setOriginLocation] = useState<{
-    lat: number;
-    lng: number;
-  } | null>(null);
-  const [destinationLocation, setDestinationLocation] = useState<{
-    lat: number;
-    lng: number;
-  } | null>(null);
+  const [originLocation, setOriginLocation] = useState<{lat: number;lng: number;} | null>(null);
+  const [destinationLocation, setDestinationLocation] = useState<{lat: number;lng: number;} | null>(null);
 
   const [distance, setDistance] = useState<string | null>(null);
   const [time, setTime] = useState<string | null>(null);
@@ -119,11 +113,7 @@ function MapComponent() {
 
   const onSubmit = (data: MapComponentProps) => {};
 
-  const setNameUbication = (
-    lat: number,
-    lng: number,
-    type: "origin" | "destination"
-  ) => {
+  const setNameUbication = (lat: number,lng: number,type: "origin" | "destination") => {
     const origin = new google.maps.LatLng(lat, lng);
     const geocoder = new google.maps.Geocoder();
 
@@ -141,6 +131,7 @@ function MapComponent() {
           if (type === "origin") {
             setValue("origin", formattedAddress);
             setOriginLocation({ lat, lng });
+            localStorage.setItem("originLocalStorage", JSON.stringify({lat,lng}));
           } else {
             setValue("destination", formattedAddress);
             setDestinationLocation({ lat, lng });
@@ -232,7 +223,15 @@ function MapComponent() {
     };
 
     fetchServices();
+
   }, []);
+
+  useEffect(() => {
+    const originLocalStorage = localStorage.getItem("originLocalStorage");
+    if (originLocalStorage && isLoaded) { 
+      setNameUbication(JSON.parse(originLocalStorage).lat, JSON.parse(originLocalStorage).lng, "origin");
+     }
+  }, [isLoaded]);
 
  /*  useEffect(() => {
     handleUseCurrentLocation("origin")();
@@ -251,20 +250,15 @@ function MapComponent() {
       const place = searchResultOrigin?.getPlace();
       if (place?.geometry) {
         if (place.geometry.location) {
-          setOriginLocation({
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng(),
-          });
+          setOriginLocation({lat: place.geometry.location.lat(),lng: place.geometry.location.lng()});
+          localStorage.setItem("originLocalStorage", JSON.stringify({lat: place.geometry.location.lat(),lng: place.geometry.location.lng()}));
         }
       }
     } else {
       const place = searchResultDestination?.getPlace();
       if (place?.geometry) {
         if (place.geometry.location) {
-          setDestinationLocation({
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng(),
-          });
+          setDestinationLocation({lat: place.geometry.location.lat(),lng: place.geometry.location.lng()});
         }
       }
     }
@@ -304,8 +298,8 @@ function MapComponent() {
         },
         async (walkingResponse, walkingStatus) => {
           if (walkingStatus === "OK" && walkingResponse) {
-            const walkingDistanceText =
-              walkingResponse.rows[0].elements[0].distance.text;
+            
+            const walkingDistanceText = walkingResponse.rows[0].elements[0].distance.text;
 
             // Obtener la duración en modo DRIVING
             service.getDistanceMatrix(
@@ -319,9 +313,9 @@ function MapComponent() {
                   const drivingTimeText = drivingResponse.rows[0].elements[0].duration.text;
                   //get time in minutes
                   const drivingTime = drivingResponse.rows[0].elements[0].duration.value / 60;
-
-                  // Aquí puedes realizar los cálculos de precio
-                  const distance = parseFloat(walkingDistanceText.split(" ")[0]);
+                  
+                  //get distance in km
+                  const distance = walkingResponse.rows[0].elements[0].distance.value / 1000;
 
                   const data = await getValueService();
                   const base_rate = data[0].base_rate;
