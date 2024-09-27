@@ -497,6 +497,7 @@ function MapComponent() {
             onClick={calculateValue}
             fullWidth
             endIcon={<SendIcon />}
+            sx={{ borderRadius: 9 }}
           >
             Cotizar viaje
           </LoadingButton>

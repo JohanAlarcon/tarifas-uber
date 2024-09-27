@@ -62,7 +62,7 @@ function WhatsAppRequest({ distance, time, price, origin, destination, valueServ
             color="success"
             startIcon={<WhatsAppIcon />}
             onClick={handleModalOpen}
-            sx={{ fontSize: '1.2rem', padding: '10px 20px' }}
+            sx={{ fontSize: '1.0rem', borderRadius: 9 }}
           >
             Solicitar servicio por WhatsApp
           </Button>
