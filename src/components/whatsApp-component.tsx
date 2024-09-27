@@ -127,7 +127,7 @@ function WhatsAppRequest({ distance, time, price, origin, destination, valueServ
               href={group}
               target="_blank"
               startIcon={<WhatsAppIcon />}
-              sx={{ mb: 2 }}
+              sx={{ mb: 2, borderRadius: 9 }}
             >
               Unirme al grupo de WhatsApp
             </Button>
