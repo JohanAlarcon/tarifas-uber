@@ -87,12 +87,9 @@ function MapComponent() {
   const [valueService, setValueService] = useState<number>(2);
   const [loading, setLoading] = useState<boolean>(false);
   const [services, setServices] = useState<Service[]>([]);
-  const [directionsResponse, setDirectionsResponse] =
-    useState<google.maps.DirectionsResult | null>(null);
-  const [searchResultOrigin, setSearchResultOrigin] =
-    useState<google.maps.places.Autocomplete | null>(null);
-  const [searchResultDestination, setSearchResultDestination] =
-    useState<google.maps.places.Autocomplete | null>(null);
+  const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult | null>(null);
+  const [searchResultOrigin, setSearchResultOrigin] = useState<google.maps.places.Autocomplete | null>(null);
+  const [searchResultDestination, setSearchResultDestination] = useState<google.maps.places.Autocomplete | null>(null);
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -182,23 +179,23 @@ function MapComponent() {
     if (valueService == 1) {
       data = [
         {
-          base_rate: 5000,
-          base_km: 5,
-          per_km_rate: 1100,
-          per_min_rate: 0,
-          night_surcharge: 1000,
-          festive_surcharge: 1000,
+          base_rate: 5000,//base de domicilio
+          base_km: 5,//minimo de domicilio kilometros
+          per_km_rate: 1100,//tarifa por kilometro de domicilio
+          per_min_rate: 80,//tarifa por minuto de domicilio
+          night_surcharge: 1000,//recargo nocturno de domicilio
+          festive_surcharge: 1000,//recargo festivo de domicilio
         },
       ];
     } else {
       data = [
         {
-          base_rate: 4000,
-          base_km: 4,
-          per_km_rate: 900,
-          per_min_rate: 100,
-          night_surcharge: 1000,
-          festive_surcharge: 1000,
+          base_rate: 4000,//base de transporte
+          base_km: 4,//minimo de transporte kilometros
+          per_km_rate: 900,//tarifa por kilometro de transporte
+          per_min_rate: 100,//tarifa por minuto de transporte
+          night_surcharge: 1000,//recargo nocturno de transporte
+          festive_surcharge: 1000,//recargo festivo de transporte
         },
       ];
     }
@@ -268,16 +265,16 @@ function MapComponent() {
     if (originLocation && destinationLocation) {
       setLoading(true);
       const service = new google.maps.DistanceMatrixService();
-      const directionsService = new google.maps.DirectionsService();
+      /* const directionsService = new google.maps.DirectionsService();
 
       directionsService.route(
         {
           origin: originLocation,
           destination: destinationLocation,
-          travelMode: google.maps.TravelMode.WALKING,
+          travelMode: google.maps.TravelMode.DRIVING,
           drivingOptions: {
             departureTime: new Date(),
-            trafficModel: google.maps.TrafficModel.BEST_GUESS,
+            trafficModel: google.maps.TrafficModel.PESSIMISTIC,
           },
           optimizeWaypoints: true,
         },
@@ -288,7 +285,7 @@ function MapComponent() {
             console.error(`Error al obtener la ruta: ${status}`);
           }
         }
-      );
+      ); */
 
       service.getDistanceMatrix(
         {
@@ -337,6 +334,10 @@ function MapComponent() {
 
                   if (isHoliday(new Date())) {
                     price += festive_surcharge;
+                  }
+
+                  if (distance > 10) {
+                      price += 500;
                   }
 
                   const formatPrice = new Intl.NumberFormat("es-CO", {
@@ -530,7 +531,7 @@ function MapComponent() {
           <GoogleMap
             mapContainerStyle={containerStyle}
             center={center}
-            zoom={12}
+            zoom={13}
             onClick={(e) => handleMapClick(e)}
           >
             {originLocation && <Marker position={originLocation} label="A" />}
@@ -553,7 +554,7 @@ function MapComponent() {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
-          zoom={12}
+          zoom={13}
           onClick={(e) => handleMapClick(e)}
         >
           {originLocation && <Marker position={originLocation} label="A" />}
