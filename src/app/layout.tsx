@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Servicio de transprte en Ibagué',
+  title: 'Servicio de transporte en Ibagué',
   description: 'Calcula el precio entre dos ubicaciones en Ibagué. Elige entre barrios, conjuntos y direcciones precisas.',
 };
 
