@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Rapimoto - Servicio de transprte en Ibagué',
-  description: 'Calcula la distancia entre dos ubicaciones en Ibagué. Elige entre barrios, conjuntos y direcciones precisas.',
+  title: 'Servicio de transprte en Ibagué',
+  description: 'Calcula el precio entre dos ubicaciones en Ibagué. Elige entre barrios, conjuntos y direcciones precisas.',
 };
 
 export default function RootLayout({
