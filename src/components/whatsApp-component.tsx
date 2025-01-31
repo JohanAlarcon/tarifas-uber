@@ -26,7 +26,7 @@ function WhatsAppRequest({ distance, time, price, origin, destination, valueServ
   const generateWhatsAppMessage = () => {
     return `🛵 *Solicitud de ${valueService === 2 ? 'Domicilio' : 'Transporte'}* 🛵
 
-        Hola, quiero solicitar un servicio. Aquí están los detalles de mi solicitud:
+        ¡Hola! Me gustaría solicitar un servicio. Aquí están los detalles:
 
         📍 *Origen*: ${origin}
         📍 *Destino*: ${destination}
