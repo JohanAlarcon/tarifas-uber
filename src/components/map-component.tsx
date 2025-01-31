@@ -213,8 +213,8 @@ function MapComponent() {
       /*const response = await fetch("/api/services");
       const data = await response.json();*/
       const data = [
-        { id: 1, name: "Servicio de domicilio" },
-        { id: 2, name: "Servicio de transporte" },
+        { id: 1, name: "Servicio de transporte" },
+        { id: 2, name: "Servicio de domicilio" },
       ];
       setServices(data);
     };
@@ -265,27 +265,6 @@ function MapComponent() {
     if (originLocation && destinationLocation) {
       setLoading(true);
       const service = new google.maps.DistanceMatrixService();
-      /* const directionsService = new google.maps.DirectionsService();
-
-      directionsService.route(
-        {
-          origin: originLocation,
-          destination: destinationLocation,
-          travelMode: google.maps.TravelMode.DRIVING,
-          drivingOptions: {
-            departureTime: new Date(),
-            trafficModel: google.maps.TrafficModel.PESSIMISTIC,
-          },
-          optimizeWaypoints: true,
-        },
-        (response, status) => {
-          if (status === "OK") {
-            setDirectionsResponse(response);
-          } else {
-            console.error(`Error al obtener la ruta: ${status}`);
-          }
-        }
-      ); */
 
       service.getDistanceMatrix(
         {
@@ -346,9 +325,9 @@ function MapComponent() {
                   }).format(price);
 
                   // Actualizar el estado con la distancia y el tiempo
-                  setDistance(`La distancia es de ${walkingDistanceText}`);
-                  setTime(`El tiempo estimado es de ${drivingTimeText}`);
-                  setPrice(`El precio estimado es de ${formatPrice}`);
+                  setDistance(`${walkingDistanceText}`);
+                  setTime(`${drivingTimeText}`);
+                  setPrice(`${formatPrice}`);
                   setLoading(false);
                 }
               }
@@ -381,18 +360,15 @@ function MapComponent() {
         justifyContent="center"
       >
         <Avatar
-          alt="Rapimoto"
           /* src="/logo-rapimoto.png" */
-          src="https://siandsi2.org/application/logo-rapimoto.png"
+          src="https://siandsi2.org/application/logo.png"
           sx={{ width: 90, height: 90, mb: { xs: 2, sm: 0 } }}
         />
         <Typography
-          variant="overline"
+          variant="body1"
           textAlign={{ xs: "center", sm: "left" }}
-          fontSize="0.9rem"
         >
-          Calcula la distancia entre dos ubicaciones en Ibagué con{" "}
-          <strong>Rapimoto</strong>. Elige entre barrios, conjuntos y
+          Calcula el precio entre dos ubicaciones en Ibagué. Elige entre barrios, conjuntos y
           direcciones precisas.
         </Typography>
       </Stack>
@@ -494,13 +470,13 @@ function MapComponent() {
             disabled={loading}
             loading={loading}
             variant="contained"
-            color="error"
+            color="warning"
             onClick={calculateValue}
             fullWidth
             endIcon={<SendIcon />}
             sx={{ borderRadius: 9, mb: 1 }}
           >
-            Cotizar viaje
+            Cotizar servicio
           </LoadingButton>
         </Grid>
       </Grid>

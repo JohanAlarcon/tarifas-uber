@@ -24,9 +24,9 @@ function WhatsAppRequest({ distance, time, price, origin, destination, valueServ
   const [group, setGroup] = useState(groups[Math.floor(Math.random() * groups.length)]);
 
   const generateWhatsAppMessage = () => {
-    return `🛵 *Solicitud de ${valueService === 1 ? 'Domicilio' : 'Transporte'}* 🛵
+    return `🛵 *Solicitud de ${valueService === 2 ? 'Domicilio' : 'Transporte'}* 🛵
 
-        Hola, quiero solicitar un servicio. Aquí están los detalles del viaje:
+        Hola, quiero solicitar un servicio. Aquí están los detalles de mi solicitud:
 
         📍 *Origen*: ${origin}
         📍 *Destino*: ${destination}
@@ -37,7 +37,15 @@ function WhatsAppRequest({ distance, time, price, origin, destination, valueServ
         Por favor, indíquenme el conductor más cercano disponible.`;
     };
 
-  const handleModalOpen = () => setOpen(true);
+  //const handleModalOpen = () => setOpen(true);
+
+  const handleModalOpen = () => {
+    const message = generateWhatsAppMessage();
+    const telephone = '573219311070';
+    const url = `https://api.whatsapp.com/send?phone=${telephone}&text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  }
+
   const handleModalClose = () => setOpen(false);
 
   const copyToClipboard = () => {
@@ -48,15 +56,19 @@ function WhatsAppRequest({ distance, time, price, origin, destination, valueServ
 
   return (
     <>
-      <Paper sx={{ padding: 3, mt: 2, backgroundColor: '#f1fff8', borderTopLeftRadius: 9, borderTopRightRadius: 9 }}>
+      <Paper sx={{
+        padding: 1,
+        borderRadius: 2, // Bordes más suaves
+        backgroundColor: "#f5f5f5",
+        mt: 2, // Menor margen superior
+        boxShadow: 1, // Sombra más suave
+        mb: 2,
+      }}>
         <Typography variant="h6" textAlign="center" fontWeight="bold" color="#00796b">
           ¿Deseas solicitar este servicio?
         </Typography>
-        <Typography variant="body1" textAlign="center" mb={3}>
-          Haz clic en el botón para solicitar un conductor en nuestro grupo de WhatsApp.
-        </Typography>
 
-        <Box textAlign="center">
+        <Box textAlign="center" mt={2}>
           <Button
             variant="contained"
             color="success"
@@ -64,7 +76,7 @@ function WhatsAppRequest({ distance, time, price, origin, destination, valueServ
             onClick={handleModalOpen}
             sx={{ fontSize: '1.0rem', borderRadius: 9 }}
           >
-            Solicitar servicio por WhatsApp
+            Solicitar
           </Button>
         </Box>
       </Paper>

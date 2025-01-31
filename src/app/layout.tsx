@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: 'Rapimoto - Servicio de transprte en Ibagué',
-  description: 'Calcula la distancia entre dos ubicaciones en Ibagué con Rapimoto. Elige entre barrios, conjuntos y direcciones precisas.',
+  description: 'Calcula la distancia entre dos ubicaciones en Ibagué. Elige entre barrios, conjuntos y direcciones precisas.',
 };
 
 export default function RootLayout({
@@ -21,7 +21,6 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
         <link rel="manifest" href="/site.webmanifest"/>
-        <title>Rapi moto</title>
       </head>
       <body className={inter.className}>{children}</body>
     </html>

@@ -3,7 +3,30 @@ import { Box, Typography } from "@mui/material";
 import Link from "next/link";
 import { FaTiktok } from 'react-icons/fa';
 
+const redes = [
+  {
+    name: "Facebook",
+    icon: Facebook,
+    url: "https://www.facebook.com/share/19nHFwTgmj/?mibextid=wwXIfr",
+    style: { fontSize: 30, color: "#4267B2" },
+  },
+  {
+    name: "Instagram",
+    icon: Instagram,
+    url: "https://www.instagram.com/serviciosdomiciliariosibague?igsh=MXV3MjdxNzJrd2lneA==",
+    style: { fontSize: 30, color: "#C13584" },
+  },
+  {
+    name: "Tiktok",
+    icon: FaTiktok,
+    url: "",
+    style: { fontSize: 26, color: '#000' },
+  },
+];
+
 function Footer() {
+
+
   return (
     <Box
       component="footer"
@@ -24,7 +47,7 @@ function Footer() {
           fontSize: "0.9rem",
         }}
       >
-        ¡Bienvenidos a <span style={{ color: "#ff5722" }}>Rapimoto</span>! Tu
+        ¡Bienvenidos a <span style={{ color: "#ff5722" }}>Servicios domiciliarios</span>! Tu
         solución de transporte rápido y seguro en Ibagué.
       </Typography>
       <Box
@@ -35,27 +58,17 @@ function Footer() {
           gap: 2,
         }}
       >
-        <Link
-          href="https://www.facebook.com/profile.php?id=100094530770455"
-          target="_blank"
-          color="inherit"
-        >
-          <Facebook sx={{ fontSize: 30, color: "#4267B2" }} />
-        </Link>
-        <Link
-          href="https://www.instagram.com/rapi.moto3?igsh=a3A2dmVpM29tZDI0"
-          target="_blank"
-          color="inherit"
-        >
-          <Instagram sx={{ fontSize: 30, color: "#C13584" }} />
-        </Link>
-        <Link
-          href="https://www.tiktok.com/@rapimoto3?_t=8prZ0R4CC7Z&_r=1"
-          target="_blank"
-          color="inherit"
-        >
-          <FaTiktok style={{ fontSize: 27, color: '#000' }} />
-        </Link>
+
+        {redes.map((red, index) => 
+          red.url !== "" && (
+            <Link key={index} href={red.url} target="_blank" color="inherit">
+              {red.icon === FaTiktok ? <red.icon style={red.style} /> :
+              <red.icon sx={red.style} />
+              }
+            </Link>
+          )
+        )}
+
       </Box>
     </Box>
   );
